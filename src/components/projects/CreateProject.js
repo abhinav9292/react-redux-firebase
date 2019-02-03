@@ -1,22 +1,25 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import { createProject } from "../../store/actions/projectActions";
+import { connect } from "react-redux";
 
 export class CreateProject extends Component {
     state={
         title:'',
         content:''
-
     }
 
-    handleSubmit = (e) => {
-        e.preventDefault();
-        console.log("the state is",this.state);
-    }
 
     handleChange = (e) => {
         this.setState({
             [e.target.id] : e.target.value
         })
     }
+
+    handleSubmit = (e) => {
+        e.preventDefault();
+        this.props.createProject(this.state);
+    }
+
     render() {
         return (
             <div className="container">
@@ -39,4 +42,11 @@ export class CreateProject extends Component {
     }
 }
 
-export default CreateProject ;
+
+const mapDisptachToProps =  (dispatch) => {
+    return{
+        createProject : (project) =>  dispatch(createProject(project))
+    }
+}
+
+export default connect(null, mapDisptachToProps)(CreateProject)  ;
