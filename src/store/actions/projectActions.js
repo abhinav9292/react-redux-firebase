@@ -8,7 +8,7 @@ export const createProject = (project) => {
 
     // dispatch here dispatches an action to the reducer here 
     // and getState here is to get the state
-    return (dispatch, getState) => {
+    return (dispatch, getState, { getFirestore, getFirebase })  => {
         // make async call the database
         dispatch({ type:"CREATE_PROJECT", project })
     }
